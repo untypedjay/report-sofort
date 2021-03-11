@@ -34,7 +34,7 @@ export default function Report({ match }: Props) {
           <Layout>
             {
               isLoading ?
-              <p>Loadding...</p> :
+              <p>Loading...</p> :
                 <div className="bg-white shadow overflow-hidden sm:rounded-lg">
                   <div className="px-4 py-5 sm:px-6">
                     <h3 className="text-lg leading-6 font-medium text-gray-900">
@@ -58,7 +58,10 @@ export default function Report({ match }: Props) {
                       <DescriptionListItem label="Ort">
                         {`${report.municipality.name}, ${report.municipality.country}`}
                       </DescriptionListItem>
-                      <CommentList>{ report.comments }</CommentList>
+                      {
+                        report.comments.length > 0 &&
+                        <CommentList>{ report.comments }</CommentList>
+                      }
                     </dl>
                   </div>
                 </div>
