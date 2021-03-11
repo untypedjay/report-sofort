@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { FaComment } from 'react-icons/fa';
 import { Layout } from '../components/Layout';
 import NotFound from './NotFound';
 import { getReport } from '../api/reports';
+import { CommentList } from '../components/CommentList';
 
 interface Props {
   match: any;
@@ -69,28 +69,7 @@ export default function Report({ match }: Props) {
                         </dd>
                       </div>
 
-                      <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt className="text-sm font-medium text-gray-500">
-                          Kommentare
-                        </dt>
-                        <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                          <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
-                            <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
-                              <div className="w-0 flex-1 flex items-center">
-                                <FaComment/>
-                                <span className="ml-2 flex-1 w-0 truncate">Kommentar 1</span>
-                                <span>Datum</span>
-                              </div>
-                            </li>
-                            <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
-                              <div className="w-0 flex-1 flex items-center">
-                                <FaComment/>
-                                <span className="ml-2 flex-1 w-0 truncate">Kommentar 2</span>
-                              </div>
-                            </li>
-                          </ul>
-                        </dd>
-                      </div>
+                      <CommentList>{ report.comments }</CommentList>
                     </dl>
                   </div>
                 </div>
