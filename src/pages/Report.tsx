@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Layout } from '../components/Layout';
 import NotFound from './NotFound';
 import { getReport } from '../api/reports';
@@ -14,16 +14,17 @@ export default function Report({ match }: Props) {
   const [report, setReport] = useState<any>({});
   const [isLoading, setIsLoading] = useState(true);
 
+  const loadReport = useCallback(
+    async () => {
+      setReport(await getReport(reportId));
+      setIsLoading(false)
+    },
+    [reportId]
+  );
+
   useEffect(() => {
     loadReport();
-  }, []);
-
-  const loadReport = async () => {
-    const response = await getReport(reportId);
-    console.log(response)
-    setReport(response);
-    setIsLoading(false)
-  };
+  }, [loadReport]);
 
   return (
     <>

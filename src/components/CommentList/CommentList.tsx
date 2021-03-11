@@ -19,7 +19,12 @@ export default function CommentList({ children }: Props) {
       <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
         <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
           { children.map((comment: CommentType) => (
-            <Comment timestamp={comment.createdAt}>{ comment.text }</Comment>
+            <Comment
+              key={comment.createdAt}
+              timestamp={comment.createdAt}
+            >
+              { comment.text }
+            </Comment>
           ))
           }
         </ul>
