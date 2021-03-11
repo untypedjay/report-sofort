@@ -6,6 +6,20 @@ interface Props {
 }
 
 export default function TableRow({ children }: Props) {
+  const computeStatusClass = () => {
+    const baseClass = 'px-2 inline-flex text-xs leading-5 font-semibold rounded-full'
+    switch (children.status.name) {
+      case 'Neu':
+        return `${baseClass} bg-blue-100 text-blue-800`;
+
+      case 'Angenommen':
+        return `${baseClass} bg-yellow-100 text-yellow-800`;
+
+      default:
+        return `${baseClass} bg-green-100 text-green-800`;
+    }
+  };
+
   return (
     <tr>
       <td className="px-6 py-4 whitespace-nowrap">
@@ -29,7 +43,7 @@ export default function TableRow({ children }: Props) {
         </div>
       </td>
       <td className="px-6 py-4 whitespace-nowrap">
-        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+        <span className={computeStatusClass()}>
           { children.status.name }
         </span>
       </td>
