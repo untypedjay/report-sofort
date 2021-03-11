@@ -5,7 +5,7 @@ interface Props {
   children: any;
 }
 
-export default function TableRow({ children }: Props) {
+export default function ReportRow({ children }: Props) {
   const computeStatusClass = () => {
     const baseClass = 'px-2 inline-flex text-xs leading-5 font-semibold rounded-full'
     switch (children.status.name) {

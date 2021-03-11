@@ -2,42 +2,39 @@ import React, { useEffect, useState } from 'react';
 import { Layout } from '../components/Layout';
 import { getReports } from '../api/reports';
 import { Table } from '../components/Table';
+import { getMunicipalities } from '../api/municipalities';
 
 export default function Municipalities() {
-  const [reports, setReports] = useState([]);
+  const [municipalities, setMunicipalities] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const tableHeader = [
     {
-      title: 'Meldung',
+      title: 'Gemeinde',
       isButton: false
     },
     {
-      title: 'Ort',
+      title: 'Bezirk / Bundesland',
       isButton: false
     },
     {
-      title: 'Status',
+      title: 'Staat',
       isButton: false
     },
     {
-      title: 'Kommentare',
-      isButton: false
-    },
-    {
-      title: 'Details',
+      title: 'Zu den Meldungen',
       isButton: true
     },
   ];
 
   useEffect(() => {
-    loadReports();
+    loadMunicipalities();
   }, []);
 
-  const loadReports = async () => {
-    const response = await getReports();
+  const loadMunicipalities = async () => {
+    const response = await getMunicipalities();
     console.log(response)
-    setReports(response);
+    setMunicipalities(response);
     setIsLoading(false)
   };
 
@@ -46,7 +43,7 @@ export default function Municipalities() {
       {
         isLoading ?
           <p>Loading</p> :
-          <Table header={tableHeader}>{ reports }</Table>
+          <Table header={tableHeader}>{ municipalities }</Table>
       }
     </Layout>
   );

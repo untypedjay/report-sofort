@@ -1,5 +1,6 @@
 import React from 'react';
-import { TableHeaderItem, TableRow } from './index';
+import { ReportRow, TableHeaderItem } from './index';
+import MunicipalityRow from './MunicipalityRow';
 
 interface Props {
   header: any[];
@@ -29,8 +30,12 @@ export default function Table({ header, children }: Props) {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
               {
+                header[0].title === 'Gemeinde' ?
                 children.map(row => (
-                  <TableRow key={row.id}>{ row }</TableRow>
+                  <MunicipalityRow key={row.id}>{ row }</MunicipalityRow>
+                )) :
+                children.map(row => (
+                  <ReportRow key={row.id}>{ row }</ReportRow>
                 ))
               }
               </tbody>
