@@ -1,4 +1,4 @@
-const ENDPOINT = 'https://stage.buergermeldungen.com/graphql';
+import config from '../util/config.json';
 
 export async function getMunicipalities() {
   const response = await fetchData(municipalitiesQuery);
@@ -6,8 +6,14 @@ export async function getMunicipalities() {
   return responseBody.data.municipalities.data;
 }
 
+export async function getMunicipalityName(id: number) {
+  const response = await fetchData(municipalityQuery(id));
+  const responseBody = await response.json();
+  return responseBody.data.municipality.name;
+}
+
 async function fetchData(query: string) {
-  return await fetch(ENDPOINT, {
+  return await fetch(config.graphQLEndpoint, {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({ query: query })
@@ -29,3 +35,11 @@ const municipalitiesQuery = `{
     }
   }
 }`;
+
+const municipalityQuery = (id: number) => {
+  return `{
+    municipality(id: ${id}) {
+      name
+    }
+  }`;
+}

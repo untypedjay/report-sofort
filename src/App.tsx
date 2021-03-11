@@ -5,6 +5,7 @@ import Report from './pages/Report';
 import Nearby from './pages/Nearby';
 import Municipalities from './pages/Municipalities';
 import NotFound from './pages/NotFound';
+import Municipality from './pages/Municipality';
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <Route exact path="/reports/:reportId" component={Report}/>
         <Route exact path="/nearby" component={Nearby}/>
         <Route exact path="/locations" component={Municipalities}/>
+        <Route exact path="/locations/:locationId" component={Municipality}/>
         <Route component={NotFound}/>
       </Switch>
     </BrowserRouter>

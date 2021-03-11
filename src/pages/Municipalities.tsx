@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Layout } from '../components/Layout';
-import { getReports } from '../api/reports';
 import { Table } from '../components/Table';
 import { getMunicipalities } from '../api/municipalities';
 
@@ -33,7 +32,6 @@ export default function Municipalities() {
 
   const loadMunicipalities = async () => {
     const response = await getMunicipalities();
-    console.log(response)
     setMunicipalities(response);
     setIsLoading(false)
   };

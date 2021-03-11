@@ -1,0 +1,25 @@
+{
+  "graphQLEndpoint": "https://stage.buergermeldungen.com/graphql",
+  "reportTableHeader": [
+    {
+      "title": "Meldung",
+      "isButton": false
+    },
+    {
+      "title": "Ort",
+      "isButton": false
+    },
+    {
+      "title": "Status",
+      "isButton": false
+    },
+    {
+      "title": "Kommentare",
+      "isButton": false
+    },
+    {
+      "title": "Details",
+      "isButton": true
+    }
+  ]
+}
