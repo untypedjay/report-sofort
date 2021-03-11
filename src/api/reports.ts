@@ -4,14 +4,25 @@ export async function getReports() {
   const response = await fetch(ENDPOINT, {
     method:'POST',
     headers: {'content-type': 'application/json' },
-    body:JSON.stringify({query: reportQuery})
+    body:JSON.stringify({query: reportsQuery})
   })
 
   const responseBody = await response.json();
   return responseBody.data.reports.data;
 }
 
-const reportQuery = `{
+export async function getReport(id: number) {
+  const response = await fetch(ENDPOINT, {
+    method:'POST',
+    headers: {'content-type': 'application/json' },
+    body:JSON.stringify({query: reportQuery(id)})
+  })
+
+  const responseBody = await response.json();
+  return responseBody.data?.report;
+}
+
+const reportsQuery = `{
   reports {
     data {
       id,
@@ -30,3 +41,29 @@ const reportQuery = `{
     }
   }
 }`;
+
+const reportQuery = (id: number) => {
+  return `{
+    report(id: ${id}) {
+      category {
+        name,
+      },
+      title,
+      description,
+      location {
+        latitude,
+        longitude
+      },
+      createdAt,
+      commentCount,
+      comments {
+        text,
+        createdAt
+      },
+      municipality {
+        name,
+        country
+      }
+    }
+  }`;
+}
