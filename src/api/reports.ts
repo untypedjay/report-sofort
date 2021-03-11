@@ -1,25 +1,29 @@
 const ENDPOINT = 'https://stage.buergermeldungen.com/graphql';
 
 export async function getReports() {
-  const response = await fetch(ENDPOINT, {
-    method:'POST',
-    headers: {'content-type': 'application/json' },
-    body:JSON.stringify({query: reportsQuery})
-  })
+  const response = await fetchData(reportsQuery);
+  const responseBody = await response.json();
+  return responseBody.data.reports.data;
+}
 
+export async function getNewestReports() {
+  const response = await fetchData(newestReportsQuery);
   const responseBody = await response.json();
   return responseBody.data.reports.data;
 }
 
 export async function getReport(id: number) {
-  const response = await fetch(ENDPOINT, {
-    method:'POST',
-    headers: {'content-type': 'application/json' },
-    body:JSON.stringify({query: reportQuery(id)})
-  })
-
+  const response = await fetchData(reportQuery(id));
   const responseBody = await response.json();
   return responseBody.data?.report;
+}
+
+async function fetchData(query: string) {
+  return await fetch(ENDPOINT, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ query: query })
+  });
 }
 
 const reportsQuery = `{
@@ -37,6 +41,24 @@ const reportsQuery = `{
       createdAt,
       municipality {
         name
+      }
+    }
+  }
+}`;
+
+const newestReportsQuery = `{
+  reports(sortType: "createdAt") {
+    data {
+      id,
+      title,
+      createdAt,
+      status {
+        name
+      },
+      commentCount,
+      municipality {
+        name,
+        country
       }
     }
   }

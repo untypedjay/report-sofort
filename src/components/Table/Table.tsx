@@ -1,7 +1,12 @@
 import React from 'react';
 import { TableHeaderItem, TableRow } from './index';
 
-export default function Table() {
+interface Props {
+  header: any[];
+  children: any[];
+}
+
+export default function Table({ header, children }: Props) {
   return (
     <div className="flex flex-col">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -10,16 +15,24 @@ export default function Table() {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  <TableHeaderItem>Meldung</TableHeaderItem>
-                  <TableHeaderItem>Ort</TableHeaderItem>
-                  <TableHeaderItem>Status</TableHeaderItem>
-                  <TableHeaderItem>Kommentare</TableHeaderItem>
-                  <TableHeaderItem isButton={true}>Details</TableHeaderItem>
+                  {
+                    header.map(headerItem => (
+                      <TableHeaderItem
+                        key={headerItem.title}
+                        isButton={headerItem.isButton}
+                      >
+                        { headerItem.title }
+                      </TableHeaderItem>
+                    ))
+                  }
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                <TableRow/>
-                <TableRow/>
+              {
+                children.map(row => (
+                  <TableRow key={row.id}>{ row }</TableRow>
+                ))
+              }
               </tbody>
             </table>
           </div>
