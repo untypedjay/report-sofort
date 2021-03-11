@@ -1,6 +1,19 @@
 import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function Navbar() {
+  const location = useLocation();
+
+  const linkClass = 'px-3 py-2 rounded-md text-sm font-medium';
+  const linkClassMobile = 'block px-3 py-2 rounded-md text-base font-medium';
+
+  const calculateLinkClass = (path: string) => {
+    if (location.pathname === path) {
+      return 'bg-gray-900 text-white';
+    }
+    return 'text-gray-300 hover:bg-gray-700 hover:text-white';
+  };
+
   return (
     <div>
       <nav className="bg-gray-800">
@@ -8,15 +21,21 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <h1 className="text-white">Report Sofort</h1>
-                <p className="text-white">Immer informiert</p>
+                <img className="h-8 w-8"
+                     src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
+                     alt="Logo"/>
               </div>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
-                  {/*<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->*/}
-                  <a href="#" className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Neuste Meldungen</a>
-                  <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">In der Nähe</a>
-                  <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Gemeinden</a>
+                  <Link to="/" className={`${calculateLinkClass('/')} ${linkClass}`}>
+                    Neuste Meldungen
+                  </Link>
+                  <Link to="/nearby" className={`${calculateLinkClass('/nearby')} ${linkClass}`}>
+                    In der Nähe
+                  </Link>
+                  <Link to="/locations" className={`${calculateLinkClass('/locations')} ${linkClass}`}>
+                    Gemeinden
+                  </Link>
                 </div>
               </div>
             </div>
@@ -30,7 +49,7 @@ export default function Navbar() {
                   Menu open: "hidden", Menu closed: "block"
                 -->*/}
                 <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                 </svg>
                 {/*<!--
                   Heroicon name: outline/x
@@ -38,7 +57,7 @@ export default function Navbar() {
                   Menu open: "block", Menu closed: "hidden"
                 -->*/}
                 <svg className="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                 </svg>
               </button>
             </div>
@@ -48,10 +67,15 @@ export default function Navbar() {
         {/*<!-- Mobile menu, show/hide based on menu state. -->*/}
         <div className="md:hidden" id="mobile-menu">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {/*<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->*/}
-            <a href="#" className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Neuste Meldungen</a>
-            <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">In der Nähe</a>
-            <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Gemeinden</a>
+            <Link to="/" className={`${calculateLinkClass('/')} ${linkClassMobile}`}>
+              Neuste Meldungen
+            </Link>
+            <Link to="/nearby" className={`${calculateLinkClass('/nearby')} ${linkClassMobile}`}>
+              In der Nähe
+            </Link>
+            <Link to="/locations" className={`${calculateLinkClass('/locations')} ${linkClassMobile}`}>
+              Gemeinden
+            </Link>
           </div>
         </div>
       </nav>
