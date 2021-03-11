@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Layout } from '../components/Layout';
 import { getReports } from '../api/reports';
+import { Loader } from '../components/Loader';
 
 export default function Nearby() {
   const [reports, setReports] = useState([]);
@@ -19,7 +20,7 @@ export default function Nearby() {
 
   return (
     <Layout title="In der Nähe">
-      { isLoading ? <p>Loading</p> : <p>Nearby</p> }
+      { isLoading ? <Loader/> : <p>Nearby</p> }
     </Layout>
   );
 }

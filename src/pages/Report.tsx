@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Layout } from '../components/Layout';
 import NotFound from './NotFound';
-import { getReport } from '../api/reports';
 import { CommentList } from '../components/CommentList';
 import { DescriptionListItem } from '../components/DescriptionListItem';
+import { Loader } from '../components/Loader';
+import { getReport } from '../api/reports';
 
 interface Props {
   match: any;
@@ -34,7 +35,7 @@ export default function Report({ match }: Props) {
           <Layout>
             {
               isLoading ?
-              <p>Loading...</p> :
+              <Loader/> :
                 <div className="bg-white shadow overflow-hidden sm:rounded-lg">
                   <div className="px-4 py-5 sm:px-6">
                     <h3 className="text-lg leading-6 font-medium text-gray-900">

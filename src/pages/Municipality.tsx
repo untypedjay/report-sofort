@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Layout } from '../components/Layout';
-import { getReportsByMunicipality } from '../api/reports';
 import { Table } from '../components/Table';
-import config from '../util/config.json';
+import { Loader } from '../components/Loader';
 import { getMunicipalityName } from '../api/municipalities';
+import { getReportsByMunicipality } from '../api/reports';
+import config from '../util/config.json';
 
 interface Props {
   match: any;
@@ -31,7 +32,7 @@ export default function Municipality({ match }: Props) {
     <Layout title={municipality && `Meldungen aus ${municipality}`}>
       {
         isLoading ?
-        <p>Loading</p> :
+        <Loader/> :
         <Table header={config.reportTableHeader}>{ reports }</Table>
       }
     </Layout>

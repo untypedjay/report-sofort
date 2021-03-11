@@ -3,6 +3,7 @@ import { Layout } from '../components/Layout';
 import { getNewestReports } from '../api/reports';
 import { Table } from '../components/Table';
 import config from '../util/config.json';
+import { Loader } from '../components/Loader';
 
 export default function Newest() {
   const [reports, setReports] = useState([]);
@@ -22,7 +23,7 @@ export default function Newest() {
     <Layout title="Neuste Meldungen">
       {
         isLoading ?
-          <p>Loading</p> :
+          <Loader/> :
           <Table header={config.reportTableHeader}>{ reports }</Table>
       }
     </Layout>

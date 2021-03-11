@@ -15,6 +15,9 @@ export default function ReportRow({ children }: Props) {
       case 'Angenommen':
         return `${baseClass} bg-yellow-100 text-yellow-800`;
 
+      case 'Zurückgestellt':
+        return `${baseClass} bg-red-100 text-red-800`;
+
       default:
         return `${baseClass} bg-green-100 text-green-800`;
     }
@@ -26,7 +29,7 @@ export default function ReportRow({ children }: Props) {
         <div className="flex items-center">
           <div>
             <div className="text-sm font-medium text-gray-900">
-              { children.title }
+              { children.title.length > 70 ? `${children.title.substring(0, 67)}...` : children.title }
             </div>
             <div className="text-sm text-gray-500">
               { children.createdAt }

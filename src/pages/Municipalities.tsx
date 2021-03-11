@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Layout } from '../components/Layout';
 import { Table } from '../components/Table';
 import { getMunicipalities } from '../api/municipalities';
+import { Loader } from '../components/Loader';
 
 export default function Municipalities() {
   const [municipalities, setMunicipalities] = useState([]);
@@ -40,7 +41,7 @@ export default function Municipalities() {
     <Layout title="Gemeinden">
       {
         isLoading ?
-          <p>Loading</p> :
+          <Loader/> :
           <Table header={tableHeader}>{ municipalities }</Table>
       }
     </Layout>
