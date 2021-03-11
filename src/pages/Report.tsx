@@ -3,6 +3,7 @@ import { Layout } from '../components/Layout';
 import NotFound from './NotFound';
 import { getReport } from '../api/reports';
 import { CommentList } from '../components/CommentList';
+import { DescriptionListItem } from '../components/DescriptionListItem';
 
 interface Props {
   match: any;
@@ -44,31 +45,18 @@ export default function Report({ match }: Props) {
                   </div>
                   <div className="border-t border-gray-200">
                     <dl>
-                      <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt className="text-sm font-medium text-gray-500">
-                          Beschreibung
-                        </dt>
-                        <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                          { report.description }
-                        </dd>
-                      </div>
-                      <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt className="text-sm font-medium text-gray-500">
-                          Kategorie
-                        </dt>
-                        <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                          { report.category.name }
-                        </dd>
-                      </div>
-                      <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt className="text-sm font-medium text-gray-500">
-                          Ort
-                        </dt>
-                        <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                          {report.municipality.name}, {report.municipality.country}
-                        </dd>
-                      </div>
-
+                      <DescriptionListItem label="Beschreibung">
+                        { report.description }
+                      </DescriptionListItem>
+                      <DescriptionListItem
+                        backgroundColorClass="bg-white"
+                        label="Kategorie"
+                      >
+                        { report.category.name }
+                      </DescriptionListItem>
+                      <DescriptionListItem label="Ort">
+                        {`${report.municipality.name}, ${report.municipality.country}`}
+                      </DescriptionListItem>
                       <CommentList>{ report.comments }</CommentList>
                     </dl>
                   </div>
