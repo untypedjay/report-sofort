@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getReports } from './api/reports';
+import { Navbar } from './components/Navbar';
 
 export default function App() {
   const [reports, setReports] = useState([]);
@@ -7,6 +8,12 @@ export default function App() {
 
   useEffect(() => {
     loadReports();
+  }, []);
+
+
+
+  useEffect(() => {
+
   }, []);
 
   const loadReports = async () => {
@@ -18,7 +25,7 @@ export default function App() {
 
   return (
     <div>
-      { isLoading ? <p>Loading...</p> : <p>Data is here</p> }
+      <Navbar/>
     </div>
   );
 }
