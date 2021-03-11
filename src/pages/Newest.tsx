@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Layout } from '../components/Layout';
 import { getReports } from '../api/reports';
+import { Table } from '../components/Table';
 
 export default function Newest() {
   const [reports, setReports] = useState([]);
@@ -19,7 +20,11 @@ export default function Newest() {
 
   return (
     <Layout title="Neuste Meldungen">
-      { isLoading ? <p>Loading</p> : <p>Newest</p> }
+      {
+        isLoading ?
+          <p>Loading</p> :
+          <Table/>
+      }
     </Layout>
   );
 }
