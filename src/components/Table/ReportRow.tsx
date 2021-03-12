@@ -19,6 +19,9 @@ export default function ReportRow({ children }: Props) {
       case 'Zurückgestellt':
         return `${baseClass} bg-red-100 text-red-800`;
 
+      case 'Nicht möglich':
+        return `${baseClass} bg-red-100 text-red-800`;
+
       default:
         return `${baseClass} bg-green-100 text-green-800`;
     }
