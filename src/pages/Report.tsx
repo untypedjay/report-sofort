@@ -5,6 +5,7 @@ import { CommentList } from '../components/CommentList';
 import { DescriptionListItem } from '../components/DescriptionListItem';
 import { Loader } from '../components/Loader';
 import { getReport } from '../api/reports';
+import { calculateDistanceTo } from '../util/locations';
 
 interface Props {
   match: any;
@@ -14,18 +15,21 @@ export default function Report({ match }: Props) {
   const { reportId } = match.params;
   const [report, setReport] = useState<any>({});
   const [isLoading, setIsLoading] = useState(true);
+  const [distance, setDistance] = useState(3);
 
-  const loadReport = useCallback(
+  const loadData = useCallback(
     async () => {
-      setReport(await getReport(reportId));
+      const reportData = await getReport(reportId);
+      setReport(reportData);
+      setDistance(await calculateDistanceTo(reportData.location.latitude, reportData.location.longitude))
       setIsLoading(false)
     },
     [reportId]
   );
 
   useEffect(() => {
-    loadReport();
-  }, [loadReport]);
+    loadData();
+  }, [loadData]);
 
   return (
     <>
@@ -42,7 +46,7 @@ export default function Report({ match }: Props) {
                       { report.title }
                     </h3>
                     <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                      { report.createdAt }
+                      { report.createdAt }, etwa { distance } Kilometer entfernt
                     </p>
                   </div>
                   <div className="border-t border-gray-200">

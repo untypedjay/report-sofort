@@ -1,4 +1,4 @@
-import React, { } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Newest from './pages/Newest';
 import Report from './pages/Report';
@@ -8,6 +8,7 @@ import NotFound from './pages/NotFound';
 import Municipality from './pages/Municipality';
 
 export default function App() {
+
   return (
     <BrowserRouter>
       <Switch>

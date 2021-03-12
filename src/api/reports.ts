@@ -1,4 +1,7 @@
 import config from '../util/config.json';
+import { getClientLocation } from './location';
+import { getMunicipalities } from './municipalities';
+import { calculateDistanceTo, getDistance } from '../util/locations';
 
 export async function getReports() {
   const response = await fetchData(reportsQuery);
@@ -10,6 +13,28 @@ export async function getNewestReports() {
   const response = await fetchData(newestReportsQuery);
   const responseBody = await response.json();
   return responseBody.data.reports.data;
+}
+
+export async function getNearestReports() {
+  const location = await getClientLocation();
+  const municipalities = await getMunicipalities();
+  const locations = [];
+  for (let i = 0; i < municipalities.length; i++) {
+    locations.push({ ...municipalities[i], distance: getDistance(municipalities[i].location.latitude, municipalities[i].location.longitude, location.lat, location.lon) });
+  }
+  locations.sort((a: any, b: any) => {
+    return a.distance - b.distance;
+  });
+
+  let reports = null;
+  let index = 0;
+  while (!reports && index < locations.length) {
+    reports = await getReportsByMunicipality(locations[index].id);
+  }
+
+  const response = await fetchData(reportsNearbyQuery(reports[0].id));
+  const responseBody = await response.json();
+  return responseBody.data.reportsNearby.data;
 }
 
 export async function getReportsByMunicipality(id: number) {
@@ -47,6 +72,10 @@ const reportsQuery = `{
       createdAt,
       municipality {
         name
+      },
+      location {
+        latitude,
+        longitude
       }
     }
   }
@@ -65,10 +94,34 @@ const newestReportsQuery = `{
       municipality {
         name,
         country
+      },
+      location {
+        latitude,
+        longitude
       }
     }
   }
 }`;
+
+const reportsNearbyQuery = (id: number) => {
+  return `{
+    reportsNearby(reportId: ${id}) {
+      data {
+        id,
+        title,
+        createdAt,
+        status {
+          name
+        },
+        commentCount,
+        municipality {
+          name,
+          country
+        }
+      }
+    }
+  }`;
+}
 
 const reportsByMunicipalityQuery = (id: number) => {
   return `{

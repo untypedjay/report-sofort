@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Layout } from '../components/Layout';
-import { getReports } from '../api/reports';
+import { getNearestReports } from '../api/reports';
 import { Loader } from '../components/Loader';
+import { Table } from '../components/Table';
+import config from '../util/config.json';
 
 export default function Nearby() {
   const [reports, setReports] = useState([]);
@@ -12,7 +14,7 @@ export default function Nearby() {
   }, []);
 
   const loadReports = async () => {
-    const response = await getReports();
+    const response = await getNearestReports();
     console.log(response)
     setReports(response);
     setIsLoading(false)
@@ -20,7 +22,11 @@ export default function Nearby() {
 
   return (
     <Layout title="In der Nähe">
-      { isLoading ? <Loader/> : <p>Nearby</p> }
+      {
+        isLoading ?
+          <Loader/> :
+          <Table header={config.reportTableHeader}>{ reports }</Table>
+      }
     </Layout>
   );
 }
