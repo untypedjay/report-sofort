@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import Newest from './pages/Newest';
 import Report from './pages/Report';
 import Nearby from './pages/Nearby';
@@ -10,7 +10,7 @@ import Municipality from './pages/Municipality';
 export default function App() {
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Switch>
         <Route exact path="/" component={Newest}/>
         <Route exact path="/reports/:reportId" component={Report}/>
@@ -19,6 +19,6 @@ export default function App() {
         <Route exact path="/locations/:locationId" component={Municipality}/>
         <Route component={NotFound}/>
       </Switch>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
