@@ -46,7 +46,7 @@ export default function Report({ match }: Props) {
                       { report.title }
                     </h3>
                     <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                      { formatDateTime(report.createdAt) }, etwa { distance } Kilometer entfernt
+                      { formatDateTime(report.createdAt) }{ distance ? `, etwa ${distance} Kilometer entfernt` : '' }
                     </p>
                   </div>
                   <div className="border-t border-gray-200">
