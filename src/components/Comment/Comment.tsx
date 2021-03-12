@@ -9,12 +9,9 @@ interface Props {
 
 export default function Comment({ timestamp, children }: Props) {
   return (
-    <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
-      <div className="w-0 flex-1 flex items-center">
-        <FaComment/>
-        <span className="ml-2 flex-1 w-0">{ children }</span>
-        <span>{ formatDateTime(timestamp) }</span>
-      </div>
+    <li className="pl-3 pr-4 py-3 flex flex-col justify-between text-sm">
+      <p className="text-gray-500 ml-2 mb-2">{ formatDateTime(timestamp) }:</p>
+      <p className="ml-2">{ children }</p>
     </li>
   );
 }

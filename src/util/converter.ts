@@ -5,5 +5,5 @@ export function formatDateTime(dateTime: string) {
   const year = dateObj.getFullYear();
   const hours = dateObj.getHours();
   const minutes = (dateObj.getMinutes()<10?'0':'') + dateObj.getMinutes();
-  return `${date} ${month} ${year} um ${hours}:${minutes} Uhr`;
+  return `${date}. ${month} ${year} um ${hours}:${minutes} Uhr`;
 }
