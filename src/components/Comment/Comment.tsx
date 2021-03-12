@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaComment } from 'react-icons/fa';
+import { formatDateTime } from '../../util/converter';
 
 interface Props {
   timestamp: string,
@@ -12,7 +13,7 @@ export default function Comment({ timestamp, children }: Props) {
       <div className="w-0 flex-1 flex items-center">
         <FaComment/>
         <span className="ml-2 flex-1 w-0">{ children }</span>
-        <span>{ timestamp }</span>
+        <span>{ formatDateTime(timestamp) }</span>
       </div>
     </li>
   );

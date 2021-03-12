@@ -15,7 +15,6 @@ export default function Nearby() {
 
   const loadReports = async () => {
     const response = await getNearestReports();
-    console.log(response)
     setReports(response);
     setIsLoading(false)
   };

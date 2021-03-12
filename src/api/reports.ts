@@ -1,7 +1,7 @@
 import config from '../util/config.json';
 import { getClientLocation } from './location';
 import { getMunicipalities } from './municipalities';
-import { calculateDistanceTo, getDistance } from '../util/locations';
+import { getDistance } from '../util/locations';
 
 export async function getReports() {
   const response = await fetchData(reportsQuery);

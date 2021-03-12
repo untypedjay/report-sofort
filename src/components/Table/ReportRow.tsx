@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { calculateDistanceTo } from '../../util/locations';
+import { formatDateTime } from '../../util/converter';
 
 interface Props {
   children: any;
@@ -33,7 +33,7 @@ export default function ReportRow({ children }: Props) {
               { children.title.length > 70 ? `${children.title.substring(0, 67)}...` : children.title }
             </div>
             <div className="text-sm text-gray-500">
-              { children.createdAt }
+              { formatDateTime(children.createdAt) }
             </div>
           </div>
         </div>

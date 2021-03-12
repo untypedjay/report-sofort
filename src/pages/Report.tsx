@@ -6,6 +6,7 @@ import { DescriptionListItem } from '../components/DescriptionListItem';
 import { Loader } from '../components/Loader';
 import { getReport } from '../api/reports';
 import { calculateDistanceTo } from '../util/locations';
+import { formatDateTime } from '../util/converter';
 
 interface Props {
   match: any;
@@ -46,7 +47,7 @@ export default function Report({ match }: Props) {
                       { report.title }
                     </h3>
                     <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                      { report.createdAt }, etwa { distance } Kilometer entfernt
+                      { formatDateTime(report.createdAt) }, etwa { distance } Kilometer entfernt
                     </p>
                   </div>
                   <div className="border-t border-gray-200">
