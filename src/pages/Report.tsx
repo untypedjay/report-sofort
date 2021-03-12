@@ -24,8 +24,7 @@ export default function Report({ match }: Props) {
       setReport(reportData);
       setDistance(await calculateDistanceTo(reportData.location.latitude, reportData.location.longitude))
       setIsLoading(false)
-    },
-    [reportId]
+    }, [reportId]
   );
 
   useEffect(() => {

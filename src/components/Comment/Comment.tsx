@@ -1,5 +1,4 @@
 import React from 'react';
-import { FaComment } from 'react-icons/fa';
 import { formatDateTime } from '../../util/converter';
 
 interface Props {

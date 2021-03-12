@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Layout } from '../components/Layout';
 import { Table } from '../components/Table';
 import { Loader } from '../components/Loader';
@@ -16,17 +16,19 @@ export default function Municipality({ match }: Props) {
   const [municipality, setMunicipality] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
+  const loadReports = useCallback(
+    async () => {
+      const municipalityName = await getMunicipalityName(locationId);
+      setMunicipality(municipalityName);
+      const response = await getReportsByMunicipality(locationId);
+      setReports(response);
+      setIsLoading(false)
+    }, [locationId]
+  );
+
   useEffect(() => {
     loadReports();
-  }, []);
-
-  const loadReports = async () => {
-    const municipalityName = await getMunicipalityName(locationId);
-    setMunicipality(municipalityName);
-    const response = await getReportsByMunicipality(locationId);
-    setReports(response);
-    setIsLoading(false)
-  };
+  }, [loadReports]);
 
   return (
     <Layout title={municipality && `Meldungen aus ${municipality}`}>
